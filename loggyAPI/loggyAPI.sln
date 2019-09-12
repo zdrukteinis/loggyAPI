@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loggyAPI", "loggyAPI\loggyAPI.csproj", "{4E363BEC-D303-411F-869B-894A65F6A557}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loggyAPI.Data", "Data\loggyAPI.Data.csproj", "{ED2513D1-5406-4EED-A222-170CC20CE397}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loggyAPI.Services", "loggyAPI.Services\loggyAPI.Services.csproj", "{8E7B987C-267E-4A7D-81B4-0D2278EAB0E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{4E363BEC-D303-411F-869B-894A65F6A557}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E363BEC-D303-411F-869B-894A65F6A557}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E363BEC-D303-411F-869B-894A65F6A557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED2513D1-5406-4EED-A222-170CC20CE397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED2513D1-5406-4EED-A222-170CC20CE397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED2513D1-5406-4EED-A222-170CC20CE397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED2513D1-5406-4EED-A222-170CC20CE397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E7B987C-267E-4A7D-81B4-0D2278EAB0E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E7B987C-267E-4A7D-81B4-0D2278EAB0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E7B987C-267E-4A7D-81B4-0D2278EAB0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E7B987C-267E-4A7D-81B4-0D2278EAB0E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
