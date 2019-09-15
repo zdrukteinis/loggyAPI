@@ -1,57 +1,121 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
+using loggyAPI.Data;
 using loggyAPI.Data.Entities;
-using Microsoft.IdentityModel.Tokens;
+using loggyAPI.Data.Entities.Enums;
+using loggyAPI.Services.Helpers;
 
 namespace loggyAPI.Services.Services
 {
     public class UserService : IUserService
     {
         // users hardcoded for simplicity, store in a db with hashed passwords in production applications
-        private List<User> _users = new List<User>
+
+        private DataContext _context;
+
+        public UserService(DataContext context)
         {
-            new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
-        };
+            _context = context;
+        }
 
         public User Authenticate(string username, string password, string secret)
         {
-            var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
-
-            // return null if user not found
-            if (user == null)
-                return null;
-
-            // authentication successful so generate jwt token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
+                return null;
+            }
 
-            // remove password before returning
-            user.Password = null;
+            var user = _context.Users.SingleOrDefault(x => x.Username == username);
+
+            // check if username exists
+            if (user == null)
+            {
+                return null;
+            }
+
+            user.GetToken(secret);
+
+            return !user.VerifyPasswordHash(password) 
+                ? null 
+                : user;
+        }
+
+        public User Create(User user, string password)
+        {
+            // validation
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new AppException("Password is required");
+            }
+
+            if (_context.Users.Any(x => x.Username == user.Username))
+            {
+                throw new AppException($"Username \"{user.Username}\" is already taken");
+            }
+
+            UserServiceHelper.CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+            var role = new UserRole
+            {
+                Role = Role.User,
+                User = user
+            };
+            user.Role = role;
+            _context.UsersRole.Add(role);
+            _context.Users.Add(user);
+           
+            _context.SaveChanges();
 
             return user;
         }
 
+        public void Update(User userParam, string password = null)
+        {
+            var user = _context.Users.Find(userParam.Id);
+
+            if (user == null)
+                throw new AppException("User not found");
+
+            if (userParam.Username != user.Username)
+            {
+                // username has changed so check if the new username is already taken
+                if (_context.Users.Any(x => x.Username == userParam.Username))
+                {
+                    throw new AppException("Username " + userParam.Username + " is already taken");
+                }
+            }
+
+            // update user properties
+            user.FirstName = userParam.FirstName;
+            user.LastName = userParam.LastName;
+            user.Username = userParam.Username;
+
+            // update password if it was entered
+            if (!string.IsNullOrWhiteSpace(password))
+            {
+                UserServiceHelper.CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
+                user.PasswordHash = passwordHash;
+                user.PasswordSalt = passwordSalt;
+            }
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+        }
+
+        public void Delete(User userParam)
+        {
+            _context.Users.Remove(userParam);
+        }
+
         public IEnumerable<User> GetAll()
         {
-            return _users.Select(x => {
-                x.Password = null;
-                return x;
-            });
+            return _context.Users;
+        }
+
+        public User GetById(int id)
+        {
+            return _context.Users.Find(id);
         }
     }
 }
