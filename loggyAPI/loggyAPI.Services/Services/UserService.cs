@@ -1,36 +1,41 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using loggyAPI.Data;
 using loggyAPI.Data.Entities;
 using loggyAPI.Data.Entities.Enums;
+using loggyAPI.Data.Repositories;
 using loggyAPI.Services.Helpers;
 
 namespace loggyAPI.Services.Services
 {
-    public class UserService : IUserService
+    public class UserService
+        : IUserService
     {
-        // users hardcoded for simplicity, store in a db with hashed passwords in production applications
+        private readonly IUserRepository _userRepository;
+        private readonly IProjectRepository _projectRepository;
 
-        private DataContext _context;
-
-        public UserService(DataContext context)
+        public UserService(IUserRepository userRepository, IProjectRepository projectRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
+            _projectRepository = projectRepository;
         }
 
         public User Authenticate(string username, string password, string secret)
         {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(username))
             {
-                return null;
+                throw new AppException("Username is required");
             }
 
-            var user = _context.Users.SingleOrDefault(x => x.Username == username);
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new AppException("Password is required");
+            }
+
+            var user = _userRepository.GetUserByUsername(username);
 
             // check if username exists
             if (user == null)
             {
-                return null;
+                throw new AppException("User is not registered");
             }
 
             user.GetToken(secret);
@@ -48,7 +53,9 @@ namespace loggyAPI.Services.Services
                 throw new AppException("Password is required");
             }
 
-            if (_context.Users.Any(x => x.Username == user.Username))
+            var existingUser = _userRepository.GetUserByUsername(user.Username);
+
+            if (existingUser != null)
             {
                 throw new AppException($"Username \"{user.Username}\" is already taken");
             }
@@ -59,28 +66,29 @@ namespace loggyAPI.Services.Services
             var role = new UserRole
             {
                 Role = Role.User,
-                User = user
             };
             user.Role = role;
-            _context.UsersRole.Add(role);
-            _context.Users.Add(user);
-           
-            _context.SaveChanges();
+
+            _userRepository.AddUser(user,role);
 
             return user;
         }
 
-        public void Update(User userParam, string password = null)
+        public User Update(User userParam, string password = null)
         {
-            var user = _context.Users.Find(userParam.Id);
+            var user = _userRepository.GetUserById(userParam.Id);
 
             if (user == null)
+            {
                 throw new AppException("User not found");
+            }
 
             if (userParam.Username != user.Username)
             {
+                var existingUser = _userRepository.GetUserByUsername(userParam.Username);
+
                 // username has changed so check if the new username is already taken
-                if (_context.Users.Any(x => x.Username == userParam.Username))
+                if (existingUser != null)
                 {
                     throw new AppException("Username " + userParam.Username + " is already taken");
                 }
@@ -99,23 +107,36 @@ namespace loggyAPI.Services.Services
                 user.PasswordSalt = passwordSalt;
             }
 
-            _context.Users.Update(user);
-            _context.SaveChanges();
+            _userRepository.UpdateUser(user);
+            return user;
         }
 
         public void Delete(User userParam)
         {
-            _context.Users.Remove(userParam);
+            if (userParam == null)
+            {
+                throw new AppException("User param is null");
+            }
+
+            var user = _userRepository.GetUserByUsername(userParam.Username);
+
+            if (user == null)
+            {
+                throw new AppException("User not found");
+            }
+
+            _projectRepository.DeleteUserProjects(user);
+            _userRepository.DeleteUser(user);
         }
 
         public IEnumerable<User> GetAll()
         {
-            return _context.Users;
+            return _userRepository.GetAllUsers();
         }
 
         public User GetById(int id)
         {
-            return _context.Users.Find(id);
+            return _userRepository.GetUserById(id);
         }
     }
 }

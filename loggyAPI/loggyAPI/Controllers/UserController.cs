@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using loggyAPI.Data.Entities;
-using loggyAPI.Data.Entities.Enums;
 using loggyAPI.Dtos;
 using loggyAPI.Helpers;
+using loggyAPI.Services;
 using loggyAPI.Services.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -71,6 +71,26 @@ namespace loggyAPI.Controllers
                 // save 
                 _userService.Delete(user);
                 return Ok();
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost("update")]
+        public IActionResult Update([FromBody]UserDto userDto)
+        {
+            // map dto to entity
+            var user = _mapper.Map<User>(userDto);
+
+            try
+            {
+                // save 
+                var updateUser = _userService.Update(user, userDto.Password);
+                return Ok(_mapper.Map<UserDto>(updateUser));
             }
             catch (AppException ex)
             {

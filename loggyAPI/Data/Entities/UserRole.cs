@@ -8,6 +8,5 @@ namespace loggyAPI.Data.Entities
         [Key]
         public int Id { get; set; }
         public Role Role { get; set; }
-        public User User { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using loggyAPI.Data.Entities;
 using loggyAPI.Dtos;
 
@@ -10,6 +11,12 @@ namespace loggyAPI.Helpers
         {
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
+
+            CreateMap<LogEntry, LogEntryDto>();
+            CreateMap<LogEntryDto, LogEntry>();
+
+            CreateMap<Project, ProjectDto>();
+            CreateMap<ProjectDto, Project>();
         }
     }
 }
