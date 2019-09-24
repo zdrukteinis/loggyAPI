@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using loggyAPI.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace loggyAPI.Data.Repositories
 {
@@ -52,8 +53,10 @@ namespace loggyAPI.Data.Repositories
 
         public void DeleteUserProjects(User user)
         {
-            var projectsToRemove = _dataContext.Projects.Where(x => x.User == user);
-            _dataContext.Projects.RemoveRange(projectsToRemove);
+            var projectsToRemove = _dataContext.Projects
+                .Include(x => x.LogEntries)
+                .Where(x => x.User == user);
+            _dataContext.Remove(projectsToRemove);
             _dataContext.SaveChanges();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using loggyAPI.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace loggyAPI.Data.Repositories
 {
@@ -19,7 +20,9 @@ namespace loggyAPI.Data.Repositories
 
         public User GetUserByUsername(string username)
         {
-            return _dataContext.Users.FirstOrDefault(x => x.Username == username);
+            return _dataContext.Users
+                .Include(x => x.Role)
+                .FirstOrDefault(x => x.Username == username);
         }
 
         public User GetUserById(int id)
@@ -43,6 +46,7 @@ namespace loggyAPI.Data.Repositories
         public void DeleteUser(User user)
         {
             _dataContext.Users.Remove(user);
+            _dataContext.UsersRole.Remove(user.Role);
             _dataContext.SaveChanges();
         }
     }

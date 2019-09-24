@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using loggyAPI.Attributes;
 using loggyAPI.Data.Entities;
+using loggyAPI.Data.Entities.Enums;
 using loggyAPI.Dtos;
 using loggyAPI.Helpers;
 using loggyAPI.Services;
@@ -60,6 +62,7 @@ namespace loggyAPI.Controllers
             }
         }
 
+        [Role(Role.Admin)]
         [HttpPost("delete")]
         public IActionResult Delete([FromBody] UserDto userDto)
         {
