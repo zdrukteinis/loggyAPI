@@ -10,7 +10,7 @@ using loggyAPI.Data;
 namespace loggyAPI.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190921161407_Initial")]
+    [Migration("20190929195846_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

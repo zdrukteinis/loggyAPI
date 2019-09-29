@@ -40,7 +40,7 @@ namespace loggyAPI.Data.Repositories
 
         public List<LogEntry> GetProjectLogEntries(Project project)
         {
-            throw new NotImplementedException();
+            return _dataContext.LogsEntries.Where(x => x.Project == project).ToList();
         }
 
         public void DeleteLogEntry(LogEntry logEntry)

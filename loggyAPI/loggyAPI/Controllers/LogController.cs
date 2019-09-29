@@ -89,8 +89,8 @@ namespace loggyAPI.Controllers
             try
             {
                 // save
-                _logService.GetProjectEntries(project);
-                return Ok();
+                var projectEntries = _logService.GetProjectEntries(project);
+                return Ok(projectEntries);
             }
             catch (AppException ex)
             {
