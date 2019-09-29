@@ -29,12 +29,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Description\": \"Worked on this and that...\",\n\t\"From\": \"2019-07-12\",\n\t\"To\": \"2019-07-13\",\n\t\"Project\" : {\n\t\t\"Id\" : 3\n\t},\n\t\"User\" : {\n\t\t\"Id\": 3\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"Description\": \"Worked on this and that...\",\n\t\"From\": \"2019-07-12\",\n\t\"To\": \"2019-07-13\",\n\t\"Project\" : {\n\t\t\"Id\" : 3\n\t},\n\t\"User\" : {\n\t\t\"Id\": 3\n\t}\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/log/create",
@@ -75,12 +70,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Description\": \"Worked\",\n\t\"From\": \"2019-07-12\",\n\t\"To\": \"2019-07-13\",\n\t\"Project\" : {\n\t\t\"Id\" : 3\n\t},\n\t\"User\" : {\n\t\t\"Id\": 3\n\t},\n\t\"Id\":3\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"Description\": \"Worked\",\n\t\"From\": \"2019-07-12\",\n\t\"To\": \"2019-07-13\",\n\t\"Project\" : {\n\t\t\"Id\" : 3\n\t},\n\t\"User\" : {\n\t\t\"Id\": 3\n\t},\n\t\"Id\":3\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/log/update",
@@ -121,12 +111,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Description\": \"Worked on this and that...\",\n\t\"From\": \"2019-07-12\",\n\t\"To\": \"2019-07-13\",\n\t\"Project\" : {\n\t\t\"Id\" : 3\n\t},\n\t\"User\" : {\n\t\t\"Id\": 3\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"Description\": \"Worked on this and that...\",\n\t\"From\": \"2019-07-12\",\n\t\"To\": \"2019-07-13\",\n\t\"Project\" : {\n\t\t\"Id\" : 3\n\t},\n\t\"User\" : {\n\t\t\"Id\": 3\n\t}\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/log/update",
@@ -170,12 +155,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\n\t\t\"Id\" : 3\n\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\n\t\t\"Id\" : 3\n\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/log/project-entries",
@@ -192,6 +172,5 @@
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

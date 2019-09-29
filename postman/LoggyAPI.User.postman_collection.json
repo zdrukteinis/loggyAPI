@@ -22,12 +22,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Username\" : \"adminFake2\",\n\t\"Password\" : \"adminFake2\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"Username\" : \"adminFake2\",\n\t\"Password\" : \"adminFake2\"\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/user/authenticate",
@@ -62,12 +57,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Id\" : 1,\n\t\"Username\" : \"adminFake2\",\n\t\"Password\" : \"adminFake2\",\n\t\"FirstName\": \"FirstName\",\n\t\"LastName\": \"LastName\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"Id\" : 1,\n\t\"Username\" : \"adminFake2\",\n\t\"Password\" : \"adminFake2\",\n\t\"FirstName\": \"FirstName\",\n\t\"LastName\": \"LastName\"\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/user/Update",
@@ -109,12 +99,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Username\" : \"adminFake2\",\n\t\"Password\" : \"adminFake2\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"Username\" : \"adminFake2\",\n\t\"Password\" : \"adminFake2\"\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/user/delete",
@@ -146,12 +131,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Username\" : \"adminFake2\",\n\t\"Password\" : \"adminFake2\",\n\t\"FirstName\": \"FirstName\",\n\t\"LastName\": \"LastName\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"Username\" : \"adminFake2\",\n\t\"Password\" : \"adminFake2\",\n\t\"FirstName\": \"FirstName\",\n\t\"LastName\": \"LastName\"\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/user/register",
@@ -163,6 +143,50 @@
 					"path": [
 						"user",
 						"register"
+					]
+				},
+				"description": "Register"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAll",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTU2OTc4NzMzMywiZXhwIjoxNTcwMzkyMTMzLCJpYXQiOjE1Njk3ODczMzN9.O8sVtdvHQgx0tc3krcloprP4lwUy24HeNsNoeE1gjt8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Username\" : \"adminFake2\",\n\t\"Password\" : \"adminFake2\",\n\t\"FirstName\": \"FirstName\",\n\t\"LastName\": \"LastName\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44398/user",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"user"
 					]
 				},
 				"description": "Register"

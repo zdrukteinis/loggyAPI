@@ -29,12 +29,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Name\":\"ProjectX\",\n\t\"Description\":\"Greatest project of all time.\",\n\t\"User\" : {\n\t\t\"Username\": \"adminFake2\"\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"Name\":\"ProjectX\",\n\t\"Description\":\"Greatest project of all time.\",\n\t\"User\" : {\n\t\t\"Username\": \"adminFake2\"\n\t}\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/project/create",
@@ -65,12 +60,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Id\":2,\n\t\"Name\":\"ProjectXX\",\n\t\"Description\":\"Greatest project of all time.\",\n\t\"User\" : {\n\t\t\"Username\": \"adminFake2\"\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"Id\":2,\n\t\"Name\":\"ProjectXX\",\n\t\"Description\":\"Greatest project of all time.\",\n\t\"User\" : {\n\t\t\"Username\": \"adminFake2\"\n\t}\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/project/update",
@@ -111,12 +101,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Name\":\"ProjectXX\",\n\t\"Description\":\"Greatest project of all time.\",\n\t\"User\" : {\n\t\t\"Username\": \"adminFake2\",\n\t\t\"Id\": 3\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"Name\":\"ProjectXX\",\n\t\"Description\":\"Greatest project of all time.\",\n\t\"User\" : {\n\t\t\"Username\": \"adminFake2\",\n\t\t\"Id\": 3\n\t}\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/project/delete",
@@ -160,12 +145,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\t\n\t\"Username\": \"adminFake2\"\n\t\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\t\n\t\"Username\": \"adminFake2\"\n\t\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/project",
@@ -181,6 +161,5 @@
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
