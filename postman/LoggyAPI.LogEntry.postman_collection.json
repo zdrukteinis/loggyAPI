@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "9203dfd5-95f8-4253-8be1-d632b4191aaf",
+		"name": "LoggyAPI.LogEntry",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjMiLCJuYmYiOjE1NjkwODkxNDcsImV4cCI6MTU2OTY5Mzk0NywiaWF0IjoxNTY5MDg5MTQ3fQ.RmgUZwbu_87I__sT0nwyWYW6Dre8sYRUadwccLd5i7M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Description\": \"Worked on this and that...\",\n\t\"From\": \"2019-07-12\",\n\t\"To\": \"2019-07-13\",\n\t\"Project\" : {\n\t\t\"Id\" : 3\n\t},\n\t\"User\" : {\n\t\t\"Id\": 3\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44398/log/create",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"log",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjMiLCJuYmYiOjE1NjkwODkxNDcsImV4cCI6MTU2OTY5Mzk0NywiaWF0IjoxNTY5MDg5MTQ3fQ.RmgUZwbu_87I__sT0nwyWYW6Dre8sYRUadwccLd5i7M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Description\": \"Worked\",\n\t\"From\": \"2019-07-12\",\n\t\"To\": \"2019-07-13\",\n\t\"Project\" : {\n\t\t\"Id\" : 3\n\t},\n\t\"User\" : {\n\t\t\"Id\": 3\n\t},\n\t\"Id\":3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44398/log/update",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"log",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjMiLCJuYmYiOjE1NjkwODkxNDcsImV4cCI6MTU2OTY5Mzk0NywiaWF0IjoxNTY5MDg5MTQ3fQ.RmgUZwbu_87I__sT0nwyWYW6Dre8sYRUadwccLd5i7M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Description\": \"Worked on this and that...\",\n\t\"From\": \"2019-07-12\",\n\t\"To\": \"2019-07-13\",\n\t\"Project\" : {\n\t\t\"Id\" : 3\n\t},\n\t\"User\" : {\n\t\t\"Id\": 3\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44398/log/update",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"log",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetProjectLogEntries",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjMiLCJuYmYiOjE1NjkwODkxNDcsImV4cCI6MTU2OTY5Mzk0NywiaWF0IjoxNTY5MDg5MTQ3fQ.RmgUZwbu_87I__sT0nwyWYW6Dre8sYRUadwccLd5i7M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\t\"Id\" : 3\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44398/log/project-entries",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"log",
+						"project-entries"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
