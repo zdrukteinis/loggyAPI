@@ -12,5 +12,6 @@ namespace loggyAPI.Data.Repositories
         void UpdateProject(Project project);
         void DeleteProject(Project project);
         void DeleteUserProjects(User user);
+        Project GetProjectById(int projectId);
     }
 }

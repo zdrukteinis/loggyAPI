@@ -106,5 +106,11 @@ namespace loggyAPI.Services.Services
             var projects =  _projectRepository.GetUserProjects(user);
             return projects;
         }
+
+        public Project GetProject(int id)
+        {
+            return _projectRepository.GetProjectById(id);
+        }
+
     }
 }

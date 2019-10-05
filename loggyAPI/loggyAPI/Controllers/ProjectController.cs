@@ -15,12 +15,14 @@ namespace loggyAPI.Controllers
     public class ProjectController : Controller
     {
         private readonly IProjectService _projectService;
+        private readonly ILogService _logService;
         private readonly IMapper _mapper;
 
-        public ProjectController(IMapper mapper, IProjectService projectService)
+        public ProjectController(IMapper mapper, IProjectService projectService, ILogService logService)
         {
             _mapper = mapper;
             _projectService = projectService;
+            _logService = logService;
         }
 
         [HttpPost("create")]
@@ -91,6 +93,51 @@ namespace loggyAPI.Controllers
                 // save 
                 var projects = _projectService.GetUserProjects(user).Select(x => _mapper.Map<ProjectDto>(x));
                 return Ok(projects);
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetUserProject(int id)
+        {
+            // map dto to entity
+
+            try
+            {
+                // save 
+                var projects = _mapper.Map<ProjectDto>(_projectService.GetProject(id));
+                return Ok(projects);
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}/logs")]
+        public IActionResult GetUserProjectEntries(int id)
+        {
+            // map dto to entity
+
+            try
+            {
+                // save 
+                var projects = _projectService.GetProject(id);
+                if(projects == null)
+                {
+                    return BadRequest(new { message = "Project not found." });
+                }
+                var result = _logService.GetProjectEntries(projects).Select( x=> new {
+                    Description = x.Description,
+                    From = x.From ,
+                    To = x.To
+                });
+                return Ok(result);
             }
             catch (AppException ex)
             {

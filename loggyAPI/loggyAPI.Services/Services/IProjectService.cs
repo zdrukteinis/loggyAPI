@@ -10,5 +10,6 @@ namespace loggyAPI.Services.Services
         void Delete(Project project);
         Project GetProject(string projectName, User user);
         List<Project> GetUserProjects(User user);
+        Project GetProject(int id);
     }
 }

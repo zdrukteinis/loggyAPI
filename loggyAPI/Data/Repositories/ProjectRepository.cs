@@ -59,5 +59,10 @@ namespace loggyAPI.Data.Repositories
             _dataContext.Remove(projectsToRemove);
             _dataContext.SaveChanges();
         }
+
+        public Project GetProjectById(int projectId)
+        {
+            return _dataContext.Projects.FirstOrDefault(x => x.Id == projectId);
+        }
     }
 }
