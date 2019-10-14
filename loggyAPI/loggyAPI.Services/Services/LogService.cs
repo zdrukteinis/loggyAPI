@@ -22,7 +22,6 @@ namespace loggyAPI.Services.Services
                 throw new AppException("Project is required");
             }
 
-
             if (logEntry.User == null)
             {
                 throw new AppException("User is required");

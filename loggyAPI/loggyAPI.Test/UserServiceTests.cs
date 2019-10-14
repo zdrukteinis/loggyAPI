@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using loggyAPI.Data.Entities;
@@ -16,12 +14,14 @@ namespace Tests
     {
         private IUserService _userService;
         private Mock<IUserRepository> _userRepository;
+        private Mock<IProjectRepository> _projectRepository;
 
         [SetUp]
         public void Setup()
         {
             _userRepository = new Mock<IUserRepository>();
-            _userService = new UserService(_userRepository.Object, null);
+            _projectRepository = new Mock<IProjectRepository>();
+            _userService = new UserService(_userRepository.Object, _projectRepository.Object);
         }
 
         [Test]
@@ -58,6 +58,10 @@ namespace Tests
             var user = new User
             {
                 Username = "username",
+                Role = new UserRole
+                {
+                    Role = loggyAPI.Data.Entities.Enums.Role.Admin
+                }
             };
 
             UserServiceHelper.CreatePasswordHash("username", out var hash, out var salt);
@@ -151,7 +155,35 @@ namespace Tests
         }
 
         [Test]
-        public void Update_UsernameDtoIsValid_ReturnsUpdateUser()
+        public void Update_UsernameIsNewButNotTaken_ReturnsUpdatedUser()
+        {
+            var oldUser = new User
+            {
+                Username = "username",
+                Id = 1
+            };
+
+            var newUser = new User
+            {
+                Username = "username2",
+                Id = 1
+            };
+
+            _userRepository
+                .Setup(x => x.GetUserById(oldUser.Id))
+                .Returns(oldUser);
+
+            var updatedUser = _userService.Update(newUser, "password");
+
+            oldUser.FirstName = newUser.FirstName;
+            oldUser.LastName = newUser.LastName;
+            oldUser.Username = newUser.Username;
+
+            Assert.AreEqual(oldUser,updatedUser);
+        }
+
+        [Test]
+        public void Update_UsernameDtoIsValid_ReturnsUpdatedUser()
         {
             var oldUser = new User
             {
@@ -176,7 +208,7 @@ namespace Tests
         }
 
         [Test]
-        public void Delete_UserIsNull_ThrowsAppException()
+        public void Delete_UserParamIsNull_ThrowsAppException()
         {
             var user = new User
             {
@@ -193,7 +225,7 @@ namespace Tests
 
             var ex = Assert.Throws(typeof(AppException),
                 () => _userService.Delete(null));
-            Assert.That(ex.Message, Is.EqualTo("User is null"));
+            Assert.That(ex.Message, Is.EqualTo("User param is null"));
         }
 
         [Test]
@@ -206,13 +238,31 @@ namespace Tests
             };
 
             _userRepository
-                .Setup(x => x.GetUserByUsername("username2"))
+                .Setup(x => x.GetUserByUsername("username"))
                 .Returns(user);
             _userRepository
                 .Setup(x => x.GetUserById(user.Id))
                 .Returns(user);
 
             _userService.Delete(user);
+        }
+
+        [Test]
+        public void Delete_UserIsNotPresent_ThrowsAppException()
+        {
+            var user = new User
+            {
+                Username = "username",
+                Id = 1
+            };
+
+            _userRepository
+                .Setup(x => x.GetUserById(user.Id))
+                .Returns(user);
+
+            var ex = Assert.Throws(typeof(AppException),
+                () => _userService.Delete(user));
+            Assert.That(ex.Message, Is.EqualTo("User not found"));
         }
 
         [Test]

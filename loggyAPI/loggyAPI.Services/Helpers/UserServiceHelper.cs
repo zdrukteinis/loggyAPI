@@ -29,7 +29,7 @@ namespace loggyAPI.Services.Helpers
 
             if (user.PasswordSalt.Length != 128)
             {
-                throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
+                throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordSalt");
             }
 
             using (var hmac = new System.Security.Cryptography.HMACSHA512(user.PasswordSalt))

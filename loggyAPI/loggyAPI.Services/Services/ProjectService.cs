@@ -46,17 +46,6 @@ namespace loggyAPI.Services.Services
                 throw new AppException("Project not found");
             }
 
-            if (projectParam.Name != project.Name)
-            {
-                var existingProject = _projectRepository.GetProjectByName(projectParam.Name, projectParam.User);
-
-                // username has changed so check if the new username is already taken
-                if (existingProject != null)
-                {
-                    throw new AppException("Name " + projectParam.Name + " is already taken");
-                }
-            }
-
             project.Name = projectParam.Name;
             project.Description = projectParam.Description;
 
