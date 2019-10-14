@@ -9,6 +9,7 @@ using NUnit.Framework;
 
 namespace loggyAPI.Test
 {
+    [TestFixture]
     public class LogServiceTests
     {
         private IUserService _userService;
@@ -45,6 +46,7 @@ namespace loggyAPI.Test
                     User = new User
                     {
                         Id = 1,
+                        Token = "0000-1111-0000-1111",
                         Username = "Zane"
                     }
                 }
@@ -60,6 +62,13 @@ namespace loggyAPI.Test
         [Test]
         public void CreateLogEntry_LogOwnerNotProvided_ThrowsAppExceptions()
         {
+            var user = new User
+            {
+                Id = 1,
+                Username = "Zane",
+                Token = "0000-1111-0000-1111"
+            };
+
             var logEntry = new LogEntry
             {
                 From = DateTime.Today,
@@ -70,7 +79,12 @@ namespace loggyAPI.Test
                     Id = 1,
                     Name = "ProjectOne",
                     Description = "Project description",
-                    User = new User {Id = 1, Username = "Zane"}
+                    User = new User
+                    {
+                        Id = user.Id,
+                        Token = user.Token,
+                        Username = user.Username
+                    }
                 },
                 User = null
             };
@@ -163,6 +177,7 @@ namespace loggyAPI.Test
         {
             var newLogEntry = new LogEntry
             {
+                Id = 1,
                 From = DateTime.Today,
                 To = DateTime.Today.AddDays(7),
                 Description = "",

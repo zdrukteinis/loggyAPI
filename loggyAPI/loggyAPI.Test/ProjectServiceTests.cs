@@ -8,6 +8,7 @@ using NUnit.Framework;
 
 namespace loggyAPI.Test
 {
+    [TestFixture]
     public class ProjectServiceTests
     {
         private IUserService _userService;

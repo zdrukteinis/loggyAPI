@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using loggyAPI.Data.Entities;
 using loggyAPI.Data.Entities.Enums;
-using loggyAPI.Services;
 using loggyAPI.Services.Helpers;
 using NUnit.Framework;
 
 namespace loggyAPI.Test
 {
+    [TestFixture]
     public class UserServiceHelperTests
     {
         [Test]
         public void VerifyPasswordHash_PasswordIsNull_ThrowsArgumentNullException()
         {
+            var role = new UserRole
+            {
+                Id = 1,
+                Role = Role.Admin
+            };
+
             var user = new User
             {
                 Id = 1,
@@ -23,8 +29,8 @@ namespace loggyAPI.Test
                 PasswordSalt = new byte[] { },
                 Role = new UserRole
                 {
-                    Id = 1,
-                    Role = Role.Admin
+                    Id = role.Id,
+                    Role = role.Role
                 }
             };
 

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics.CodeAnalysis;
+using AutoMapper;
 using loggyAPI.Data.Entities;
 using loggyAPI.Dtos;
 using loggyAPI.Services;
