@@ -55,14 +55,22 @@ namespace loggyAPI.Data.Repositories
         {
             var projectsToRemove = _dataContext.Projects
                 .Include(x => x.LogEntries)
-                .Where(x => x.User == user);
+                .Where(x => x.User.Id == user.Id).ToList();
+
+            if (projectsToRemove.Count == 0)
+            {
+                return;
+            }
+
             _dataContext.Remove(projectsToRemove);
             _dataContext.SaveChanges();
         }
 
         public Project GetProjectById(int projectId)
         {
-            return _dataContext.Projects.FirstOrDefault(x => x.Id == projectId);
+            return _dataContext.Projects
+                .Include(x => x.LogEntries)
+                .FirstOrDefault(x => x.Id == projectId);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using loggyAPI.Attributes;
 using loggyAPI.Data.Entities;
 using loggyAPI.Data.Entities.Enums;
@@ -12,7 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace loggyAPI.Controllers
 {
-    [Authorize]
+
     [ApiController]
     [Route("[controller]")]
     public class UserController : Controller
@@ -105,7 +106,7 @@ namespace loggyAPI.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var users = _userService.GetAll();
+            var users = _userService.GetAll().Select(x => _mapper.Map<UserDto>(x));
             return Ok(users);
         }
     }

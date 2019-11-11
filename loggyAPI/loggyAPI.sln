@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2048
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "loggyAPI", "loggyAPI\loggyAPI.csproj", "{4E363BEC-D303-411F-869B-894A65F6A557}"
 EndProject
@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "loggyAPI.Data", "Data\loggy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "loggyAPI.Services", "loggyAPI.Services\loggyAPI.Services.csproj", "{8E7B987C-267E-4A7D-81B4-0D2278EAB0E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loggyAPI.Test", "loggyAPI.Test\loggyAPI.Test.csproj", "{6D12612D-6C4D-43BD-B00C-24B4CEBA099F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "loggyAPI.ServicesTests", "loggyAPI.Test\loggyAPI.ServicesTests.csproj", "{6D12612D-6C4D-43BD-B00C-24B4CEBA099F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "loggyAPI.ServicesGeneratedTests", "loggyAPI.ServicesTests\loggyAPI.ServicesGeneratedTests.csproj", "{B38C009F-E208-4142-BBA1-393112D0DE8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6D12612D-6C4D-43BD-B00C-24B4CEBA099F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D12612D-6C4D-43BD-B00C-24B4CEBA099F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D12612D-6C4D-43BD-B00C-24B4CEBA099F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B38C009F-E208-4142-BBA1-393112D0DE8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B38C009F-E208-4142-BBA1-393112D0DE8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B38C009F-E208-4142-BBA1-393112D0DE8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B38C009F-E208-4142-BBA1-393112D0DE8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

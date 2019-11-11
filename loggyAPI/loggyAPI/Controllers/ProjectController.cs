@@ -53,8 +53,8 @@ namespace loggyAPI.Controllers
             try
             {
                 // save 
-                _projectService.UpdateProject(project);
-                return Ok();
+                var updatedProject = _mapper.Map<ProjectDto>( _projectService.UpdateProject(project));
+                return Ok(updatedProject);
             }
             catch (AppException ex)
             {
@@ -82,7 +82,7 @@ namespace loggyAPI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult GetUserProjects([FromBody]UserDto userDto)
         {
             // map dto to entity
@@ -109,8 +109,18 @@ namespace loggyAPI.Controllers
             try
             {
                 // save 
-                var projects = _mapper.Map<ProjectDto>(_projectService.GetProject(id));
-                return Ok(projects);
+                var project = _mapper.Map<ProjectDto>(_projectService.GetProject(id));
+                return Ok(new
+                {
+                    project.Description,
+                    project.Name,
+                    LogEntries = project.LogEntries.Select(x => new
+                    {
+                        x.Description,
+                        x.From,
+                        x.To
+                    })
+                });
             }
             catch (AppException ex)
             {
@@ -133,9 +143,10 @@ namespace loggyAPI.Controllers
                     return BadRequest(new { message = "Project not found." });
                 }
                 var result = _logService.GetProjectEntries(projects).Select( x=> new {
-                    Description = x.Description,
-                    From = x.From ,
-                    To = x.To
+                    x.Id,
+                    x.Description,
+                    x.From ,
+                    x.To
                 });
                 return Ok(result);
             }

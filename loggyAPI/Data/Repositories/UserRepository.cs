@@ -15,7 +15,8 @@ namespace loggyAPI.Data.Repositories
         }
         public IEnumerable<User> GetAllUsers()
         {
-            return _dataContext.Users;
+            return _dataContext.Users
+                .Include(x => x.Role);
         }
 
         public User GetUserByUsername(string username)
