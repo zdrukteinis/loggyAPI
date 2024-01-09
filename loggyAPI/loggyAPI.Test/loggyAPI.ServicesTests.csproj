@@ -8,12 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="4.0.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Logging" Version="5.5.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Logging" Version="5.7.0" />
     <PackageReference Include="Moq" Version="4.13.0" />
     <PackageReference Include="nunit" Version="3.11.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.7.0" />
     <PackageReference Include="System.Interactive.Async" Version="3.2.0" />
   </ItemGroup>
 
